@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
-# Configure logging
+# --- Configure logging ---
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -87,7 +87,7 @@ app = FastAPI(
 OSRS_HOMEPAGE = "https://oldschool.runescape.com"
 CACHE_DURATION = 60  # Seconds
 
-# Cache storage
+# --- Cache storage ---
 _cache = {
     "data": None,
     "timestamp": 0,
@@ -207,7 +207,7 @@ async def status() -> DetailedStatusResponse:
 
 
 def main() -> None:
-    """Legacy CLI function for backward compatibility."""
+    """CLI functionality."""
     is_online, player_count, homepage_accessible = is_game_online()
 
     if not homepage_accessible:

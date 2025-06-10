@@ -98,8 +98,13 @@ _cache = {
 def get_player_count_text() -> str | None:
     """Get player count text from OSRS homepage."""
     try:
+        # Set user agent
+        headers = {
+            "User-Agent": "OSRS-Status-Monitor/1.0 (https://github.com/JoshPaulie/OSWatch) - Monitoring server status with 60s cache",
+        }
+
         # Get homepage text
-        response = requests.get(OSRS_HOMEPAGE, timeout=30)
+        response = requests.get(OSRS_HOMEPAGE, timeout=30, headers=headers)
         response.raise_for_status()
 
         # Parse text

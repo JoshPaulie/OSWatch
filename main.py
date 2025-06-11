@@ -34,12 +34,6 @@ class GameStatusResponse(BaseModel):
     )
 
 
-class HealthResponse(BaseModel):
-    """Response model for the health check endpoint."""
-
-    status: str = Field(..., example="healthy", description="API health status")
-
-
 class DetailedStatusResponse(BaseModel):
     """Response model for the detailed status endpoint."""
 

@@ -1,5 +1,6 @@
 """OSRS World Status API - Monitor Old School RuneScape server status."""
 
+import datetime as dt
 import logging
 import time
 
@@ -67,6 +68,11 @@ class DetailedStatusResponse(BaseModel):
         ...,
         example=44.8,
         description="How long until the cache expires in seconds",
+    )
+    cache_timestamp: str = Field(
+        ...,
+        example="2025-06-11T23:36:14.237361+00:00",
+        description="Timestamp of when cached data was last fetched (UTC)",
     )
 
 
@@ -194,6 +200,13 @@ async def status() -> DetailedStatusResponse:
     is_online, player_count, homepage_accessible = is_game_online()
     cache_age = time.time() - _cache["timestamp"] if _cache["data"] else 0
 
+    # Convert cache timestamp to UTC format
+    cache_timestamp = (
+        dt.datetime.fromtimestamp(_cache["timestamp"], dt.UTC).isoformat()
+        if _cache["data"]
+        else dt.datetime.now(dt.UTC).isoformat()
+    )
+
     return DetailedStatusResponse(
         game="Old School RuneScape",
         online=is_online,
@@ -202,6 +215,7 @@ async def status() -> DetailedStatusResponse:
         source=OSRS_HOMEPAGE,
         cache_age_seconds=round(cache_age, 1),
         cache_expires_in_seconds=max(0, round(CACHE_DURATION - cache_age, 1)),
+        cache_timestamp=cache_timestamp,
     )
 
 

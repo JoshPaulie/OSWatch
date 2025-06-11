@@ -6,7 +6,7 @@ import time
 
 import requests
 from bs4 import BeautifulSoup
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 # --- Configure logging ---
@@ -180,10 +180,9 @@ async def root() -> GameStatusResponse:
     is_online, player_count, homepage_accessible = is_game_online()
 
     if not homepage_accessible:
-        return GameStatusResponse(
-            status="unknown",
-            player_count=0,
-            message="OSRS homepage is currently inaccessible - status unknown",
+        raise HTTPException(
+            status_code=503,
+            detail="OSRS homepage is currently inaccessible - status unknown",
         )
 
     return GameStatusResponse(

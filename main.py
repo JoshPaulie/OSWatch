@@ -81,7 +81,7 @@ app = FastAPI(
     description="Check if Old School RuneScape game worlds are online by monitoring player count. "
     "Responses are cached for 1 minute to reduce load on OSRS servers. "
     "To be used as an intermediary for your automation.",
-    version="1.0.1",
+    version="1.0.2",
 )
 
 OSRS_HOMEPAGE = "https://oldschool.runescape.com"

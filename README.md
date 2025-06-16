@@ -1,10 +1,19 @@
-# OSWatch
+# OS Watch
 
 OSRS world status API. Scrapes player count from RuneScape homepage to determine if game worlds are online and ready.
 
 Acts as an intermediary for other tools to check game world status.
 
 _**Unofficial community API**_
+
+> [!important]
+> **OS Watch** is hosted on a free tier of [Render](https://render.com/).
+>
+> **Cold starts** are unlikely due to me personally using the API to log historic data on my own machine.
+>
+> Historic data for all would be awesome! But persistent data within Render requires me upgrading the hosting tier. With just me using the service, I'll keep on the current until others express interest.
+> 
+> If you have a use case that would benefit from 100% availability or historic data, open an issue!
 
 ## API Documentation
 

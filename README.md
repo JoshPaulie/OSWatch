@@ -4,15 +4,12 @@ OSRS world status API. Scrapes player count from RuneScape homepage to determine
 
 Acts as an intermediary for other tools to check game world status.
 
-> [!important]
-> The app is hosted on a free tier, so it powers down after idling for some time. You may experience a "cold start" when trying to access the API, but is unlikely.
->
-> If you're using the API and need it available 24/7, open an issue with your usecase. I'd be happy to upgrade to an "always on" tier, if there's a need from the community.
+_**Unofficial community API**_
 
 ## API Documentation
 
-- **Swagger UI**: [https://oswatch.bexli.dev/docs](https://oswatch.bexli.dev/docs) - Interactive API documentation with "Try it out" functionality
-- **ReDoc**: [https://oswatch.bexli.dev/redoc](https://oswatch.bexli.dev/redoc) - Clean, responsive API documentation (recommended)
+- **ReDoc**: [https://oswatch.bexli.dev/redoc](https://oswatch.bexli.dev/redoc) - Basic API with code examples (recommended)
+- **Swagger UI**: [https://oswatch.bexli.dev/docs](https://oswatch.bexli.dev/docs) - Interactive API documentation with "Try it out"
 
 
 ## Usage (Endpoints)
@@ -129,21 +126,21 @@ import (
 
 // GameStatusResponse represents the response from the root endpoint (/)
 type GameStatusResponse struct {
-    Status      string `json:"status"`       // "online", "offline", or "unknown"
-    PlayerCount int    `json:"player_count"` // Current number of players online
-    Message     string `json:"message"`      // Human-readable status message
+    Status      string `json:"status"`
+    PlayerCount int    `json:"player_count"`
+    Message     string `json:"message"`
 }
 
 // DetailedStatusResponse represents the response from the detailed status endpoint (/status)
 type DetailedStatusResponse struct {
-    Game                    string   `json:"game"`                       // Full name of the game being monitored
-    Online                  *bool    `json:"online"`                     // Whether the game is online (null if unknown)
-    PlayerCount             int      `json:"player_count"`               // Current number of players online
-    HomepageAccessible      bool     `json:"homepage_accessible"`        // Whether the OSRS homepage is accessible
-    Source                  string   `json:"source"`                     // Source URL where status information is retrieved
-    CacheAgeSeconds         float64  `json:"cache_age_seconds"`          // How old the cached data is in seconds
-    CacheExpiresInSeconds   float64  `json:"cache_expires_in_seconds"`   // How long until the cache expires
-    CacheTimestamp          string   `json:"cache_timestamp"`            // ISO 8601 timestamp of cached data (UTC)
+    Game                    string   `json:"game"`
+    Online                  *bool    `json:"online"`
+    PlayerCount             int      `json:"player_count"`
+    HomepageAccessible      bool     `json:"homepage_accessible"`
+    Source                  string   `json:"source"`
+    CacheAgeSeconds         float64  `json:"cache_age_seconds"`
+    CacheExpiresInSeconds   float64  `json:"cache_expires_in_seconds"`
+    CacheTimestamp          string   `json:"cache_timestamp"`
 }
 
 // getGameStatus fetches basic game status with proper error handling
@@ -227,7 +224,3 @@ func formatNumber(n int) string {
     return fmt.Sprintf("%s,%03d", formatNumber(n/1000), n%1000)
 }
 ```
-
---- 
-
-[Read the complete interactive docs](https://oswatch.bexli.dev/redoc)
